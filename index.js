@@ -22,7 +22,7 @@ mongoose.connect('mongodb+srv://numan:nothing@clusterx.ptuxk.mongodb.net/to-do?r
 
 app.listen(process.env.PORT || 5000,(err) => {
     if(!err) {
-        console.log("Started listening at 8080");
+        console.log("Started listening at 5000");
     }
     else {
         console.log(err);
