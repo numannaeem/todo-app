@@ -1,0 +1,10 @@
+const Item = require('../models/item');
+
+const getData = async (req, res) => {
+    const data = await Item.find()
+    data.sort((a,b) => a.dueDate<b.dueDate?-1:1)
+    console.log("GET request recieved")
+    return res.end(JSON.stringify(data))
+}
+
+module.exports = {getData}
