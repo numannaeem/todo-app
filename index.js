@@ -2,11 +2,27 @@ const express = require("express");
 const cors = require('cors');
 const mongoose  = require("mongoose");
 const { router } = require("./routes/router");
+const passport = require('passport')
+const session = require('express-session')
+const cookieParser = require('cookie-parser')
 
 const app = express()
 
-app.use(cors());
-app.use(express.json());    //optional, used to manage if request is in a different encoding
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials:true
+}));
+app.use(express.urlencoded({extended: true}))
+app.use(session({
+    secret: 'imanopenbook',
+    resave: true,
+    saveUninitialized: true
+}))
+app.use(cookieParser('imanopenbook'))
+app.use(express.json());    //used to parse the body
+app.use(passport.initialize())
+app.use(passport.session())
+require('./passportConfig')(passport)
 app.use(router);
 
 mongoose.connect('mongodb+srv://numan:nothing@clusterx.ptuxk.mongodb.net/to-do?retryWrites=true&w=majority', {
@@ -26,4 +42,16 @@ app.listen(process.env.PORT || 5000,(err) => {
     else {
         console.log(err);
     }
+})
+
+app.post('/login', (req,res,next) => {
+    passport.authenticate('local',(err,user,info) => {
+        if(err) return next(err)
+        if (!user) return res.status(401).send({"ok":false, info})
+        req.logIn(user, err => {
+            if(err) return next(err)
+            return res.send({"ok": true});
+        })
+
+    })(req,res,next)
 })
