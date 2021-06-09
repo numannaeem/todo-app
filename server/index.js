@@ -4,7 +4,6 @@ const mongoose  = require("mongoose");
 const { router } = require("./routes/router");
 const passport = require('passport')
 const session = require('express-session')
-const cookieParser = require('cookie-parser')
 
 const app = express()
 
@@ -13,13 +12,14 @@ app.use(cors({
     credentials:true
 }));
 app.use(express.urlencoded({extended: true}))
+app.set("trust proxy", 1);
 app.use(session({
     secret: 'imanopenbook',
     resave: true,
     saveUninitialized: true,
     cookie: {
-        sameSite:'none',
-        secure: true
+        sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === "production"
     }
 }))
 app.use(express.json());    //used to parse the body
