@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser')
 const app = express()
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://numan-todo.netlify.app',
     credentials:true
 }));
 app.use(express.urlencoded({extended: true}))
@@ -37,7 +37,7 @@ mongoose.connect('mongodb+srv://numan:nothing@clusterx.ptuxk.mongodb.net/to-do?r
 
 app.listen(process.env.PORT || 5000,(err) => {
     if(!err) {
-        console.log("Started listening at 5000");
+        console.log("Server up!");
     }
     else {
         console.log(err);
