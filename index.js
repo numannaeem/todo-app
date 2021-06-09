@@ -8,7 +8,7 @@ const session = require('express-session')
 const app = express()
 
 app.use(cors({
-    origin: 'https://numan-todo.netlify.app',
+    origin: process.env.NODE_ENV ==="production"? 'https://numan-todo.netlify.app':'http://localhost:3000',
     credentials:true
 }));
 app.use(express.urlencoded({extended: true}))
