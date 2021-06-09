@@ -16,9 +16,12 @@ app.use(express.urlencoded({extended: true}))
 app.use(session({
     secret: 'imanopenbook',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        sameSite:'none',
+        secure: true
+    }
 }))
-app.use(cookieParser('imanopenbook'))
 app.use(express.json());    //used to parse the body
 app.use(passport.initialize())
 app.use(passport.session())
