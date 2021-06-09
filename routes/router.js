@@ -9,7 +9,7 @@ const { Register } = require("../controllers/registerController");
 const router = express.Router();
 
 router.get('/',(req,res) => {
-    return res.end("Owned by Numan Naeem.")
+    return res.end("sameSite: 'none', cookieparser not used")
 })
 
 router.get('/items',getData);
