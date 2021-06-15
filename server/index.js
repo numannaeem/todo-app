@@ -15,8 +15,9 @@ app.use(express.urlencoded({extended: true}))
 app.set("trust proxy", 1);
 app.use(session({
     secret: 'imanopenbook',
+    proxy: true,
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax',
         secure: process.env.NODE_ENV === "production"
