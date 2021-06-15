@@ -8,7 +8,7 @@ const session = require('express-session')
 const app = express()
 
 app.use(cors({
-    origin: process.env.NODE_ENV ==="production"? 'https://numan-todo.netlify.app':'http://localhost:3000',
+    origin: process.env.NODE_ENV === "production" ? 'https://numan-todo.netlify.app':'http://localhost:3000',
     credentials:true
 }));
 app.use(express.urlencoded({extended: true}))
@@ -22,7 +22,7 @@ app.use(session({
         secure: process.env.NODE_ENV === "production"
     }
 }))
-app.use(express.json());    //used to parse the body
+app.use(express.json());    //used to parse json requests
 app.use(passport.initialize())
 app.use(passport.session())
 require('./passportConfig')(passport)
