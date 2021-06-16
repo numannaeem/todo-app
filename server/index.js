@@ -17,7 +17,7 @@ app.use(session({
     secret: 'imanopenbook',
     proxy: true,
     resave: true,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
         sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax',
         secure: process.env.NODE_ENV === "production"
@@ -28,6 +28,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 require('./passportConfig')(passport)
 app.use(router);
+require('./routes/authRoutes')(app)
 
 mongoose.connect('mongodb+srv://numan:nothing@clusterx.ptuxk.mongodb.net/to-do?retryWrites=true&w=majority', {
     useNewUrlParser: true,
@@ -48,14 +49,4 @@ app.listen(process.env.PORT || 5000,(err) => {
     }
 })
 
-app.post('/login', (req,res,next) => {
-    passport.authenticate('local',(err,user,info) => {
-        if(err) return next(err)
-        if (!user) return res.status(401).send({"ok":false, info})
-        req.logIn(user, err => {
-            if(err) return next(err)
-            return res.send({"ok": true});
-        })
 
-    })(req,res,next)
-})
