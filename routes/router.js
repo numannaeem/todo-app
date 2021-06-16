@@ -6,13 +6,9 @@ const { getData } = require("../controllers/getDataController");
 
 const router = express.Router();
 
-router.get('/',(req,res) => {
-    return res.send("To-do app by Numan Naeem")
-})
-
-router.get('/items',getData);
-router.post('/add',Add);
-router.post('/edit',Edit);
-router.post('/delete',Delete);
+router.get('/api/items',getData);
+router.post('/api/add',Add);
+router.post('/api/edit',Edit);
+router.post('/api/delete',Delete);
 
 module.exports = {router};
