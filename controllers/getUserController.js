@@ -1,7 +1,8 @@
 const getUser = (req,res) => {
+    console.log(req.user)
     if(req.user)
         return res.json(req.user.username)
-    else return res.status(404).send({message:'No user logged in'})
+    return res.status(404).send({message:'No user logged in'})
 }
 
 module.exports = { getUser }
