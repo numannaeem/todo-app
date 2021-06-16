@@ -4,8 +4,8 @@ const { Logout } = require("../controllers/logoutController");
 const { Register } = require("../controllers/registerController");
 
 module.exports = (app) => {
-    app.post('/login', Login)
-    app.post('/register',Register)
-    app.get('/getUser',getUser)
-    app.get('/logout',Logout)
+    app.post('/api/login', Login)
+    app.post('/api/register',Register)
+    app.get('/api/getUser',getUser)
+    app.get('/api/logout',Logout)
 }

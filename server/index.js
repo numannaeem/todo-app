@@ -4,9 +4,11 @@ const mongoose  = require("mongoose");
 const { router } = require("./routes/router");
 const passport = require('passport')
 const session = require('express-session')
+const path = require('path')
 
 const app = express()
 
+app.use(express.static(path.join(__dirname,"build")));
 app.use(cors({
     origin: process.env.NODE_ENV === "production" ? 'https://numan-todo.netlify.app':'http://localhost:3000',
     credentials:true
@@ -29,6 +31,10 @@ app.use(passport.session())
 require('./passportConfig')(passport)
 app.use(router);
 require('./routes/authRoutes')(app)
+
+app.use((req, res, next) => {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+  });  
 
 mongoose.connect('mongodb+srv://numan:nothing@clusterx.ptuxk.mongodb.net/to-do?retryWrites=true&w=majority', {
     useNewUrlParser: true,
