@@ -150,7 +150,7 @@ class Main extends Component {
                                 <Button style={{minWidth: this.state.isDeviceMobile? '10rem' : '12rem', margin:'0.5rem'}} variant='primary' size={this.state.isDeviceMobile? 'md' : 'lg'} onClick={this.toggleAddModal}>
                                     <i className='fa fa-plus'></i>{' '}Add new
                                 </Button>
-                                <div className='text-center p-2' style={{height:'3rem'}}>{this.state.actionLoading &&  <i className='fa fa-spinner fa-spin'></i>}</div>
+                                <div className='text-center p-2' style={{height:'2.5rem'}}>{this.state.actionLoading &&  <i className='fa fa-spinner fa-spin'></i>}</div>
                             </div>
                             <AddModal action='Add' submit={(item) => this.addItem(item)} show={this.state.isAddModalOpen} onHide={this.toggleAddModal} />
                             <AddModal action='Edit' submit={(item) => this.editItem(item,'body')} item={this.state.selectedItem} show={this.state.isEditModalOpen} onHide={this.toggleEditModal} />

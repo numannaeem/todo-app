@@ -54,9 +54,13 @@ function MobileComponent(props) {
         return(
             <div style={{overflowY:'hidden',borderRadius:'1rem',boxShadow:'0 5px 25px 2px darkgray'}}>
                 <div className='list-sm'>
+                    {items.length ? 
                     <Accordion>
                         {items}
-                    </Accordion>
+                    </Accordion> : 
+                    <div style={{display:'flex',height:'100%',justifyContent:'center',alignItems:'center',textAlign:'center'}}>
+                        <h4 className='font-weight-light text-muted'>add a new item</h4>
+                    </div>}
                 </div>
             </div>
             
