@@ -8,7 +8,7 @@ const path = require('path')
 
 const app = express()
 
-app.use(express.static(path.resolve(__dirname,"./todo-list/build")));
+app.use(express.static(path.resolve(__dirname,"./client/build")));
 app.use(cors({
     origin: process.env.NODE_ENV === "production" ? 'https://numan-todo.netlify.app':'http://localhost:3000',
     credentials:true
@@ -33,7 +33,7 @@ app.use(router);
 require('./routes/authRoutes')(app)
 
 app.use((req, res, next) => {
-    res.sendFile(path.resolve(__dirname, "./todo-list/build","index.html"));
+    res.sendFile(path.resolve(__dirname, "./client/build","index.html"));
   });  
 
 mongoose.connect('mongodb+srv://numan:nothing@clusterx.ptuxk.mongodb.net/to-do?retryWrites=true&w=majority', {

@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Pacifico&display=swap');
+
+ul {
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    height: 28.5rem;
+}
+
+.main-page {
+    background-color: hsl(56, 100%, 97%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.body {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex: 1 1 auto;
+}
+
+.header{
+    position: sticky;
+    top:0;
+    background-color: hsl(56, 100%, 87%);
+}
+
+.todo-item {
+    background-color: white;
+    white-space: pre-wrap;
+    height: 28.5rem;
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 5px 25px 1px rgba(150, 150, 150, 0.7);
+}
+
+.list-lg{
+    background-color: hsl(170, 71%, 99%);
+    overflow-y: hidden;
+    height: 28.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 5px 25px 1px rgba(150, 150, 150, 0.7);
+    
+
+}
+
+.list-sm {
+    background-color: white;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    height: 26rem;
+}
+
+.completed {
+    color: rgb(105, 105, 105);
+    text-decoration: line-through;
+    background-color: rgb(218, 218, 218);
+    border: solid 2px darkgray;
+    border-radius: 0.8rem;
+}
+
+.completed h5 {
+    margin: 0.4rem;
+}
+
+.footer-warning {
+    float: right;
+}
+
+.list-item > :not(.completed):hover {
+    box-shadow: 2px 2px 0px 0px rgb(173, 173, 173);
+}
+
+.list-item .card {
+    transition: margin 100ms ease-out,
+    background-color 100ms ease-in;
+    border: 2px solid;
+    border-radius: 0.8rem;
+}
+
+.date-subtitle {
+    font-weight: 450;
+    color: rgb(134, 134, 134);
+}
+
+.add-modal *{
+    border-radius: 0.5rem;
+}
+
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(60deg,rgb(4, 86, 134),rgb(36, 175, 255));
+    width: 100vw;
+    height: 100vh;
+}
+
+.login-card {
+    text-align: center;
+    background-color: white;
+    padding: 3rem;
+    box-shadow: 0 10px 30px 0px rgb(25, 53, 94) ;
+    border-radius: 1rem;
+}
+
+.login-card h1 {
+    font-family: 'pacifico', cursive;
+    text-align: start;
+    margin-bottom: 10%;
+}
+
+.login-card h1::after {
+    margin-left: 0.35rem;
+    content: '.';
+    font-size: 50px;
+    color: rgb(0, 162, 255);
+}
+
+
+.login-card input {
+    background-color: white;
+    border:0;
+    border-bottom:solid 1px rgba(53, 53, 211, 0.7);
+}
+
+.login-card input:focus {
+    background-color: white;
+    border-bottom: solid 3px rgb(62, 87, 197);
+    box-shadow: none;
+}
+
+.signup-modal {
+    font-family: 'Josefin Sans',sans-serif;
+}
+
+.signup-modal *{
+    border-radius: 1rem;
+}
+
+.signup-modal .modal-header{
+    border-bottom: 0;
+}
+
+
+/*SCROLLBAR EDITORS------------------------*/
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+  
+  /* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f100;
+    border-radius: 5px;
+}
+  
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.473);
+    border-radius: 5px;
+}
+  
+  /* Handle on hover */
+
+.login-page .form-control::placeholder {
+    color: darkblue;
+    opacity: 0.5;
+}
+  
+
