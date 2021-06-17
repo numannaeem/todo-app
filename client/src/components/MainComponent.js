@@ -114,20 +114,21 @@ class Main extends Component {
     render() {
         return (
                <div className='main-page'>
-                    <Navbar bg='dark' variant='dark' style={!this.state.isDeviceMobile? {margin:'0.5rem', borderRadius:'1rem'}: {}}>
-                        <Navbar.Brand className='d-none d-sm-block'>Hi, {this.state.user}!</Navbar.Brand>
-                        <Navbar.Text className='w-100 text-sm-center'>You have {this.state.listItems.filter(i => !i.completed).length} to-do's</Navbar.Text>
-                        <Nav.Link className='ml-auto px-0' onClick={() => logout().then(this.props.history.push('/login'))}>
-                            <Button variant='outline-light' style={{borderRadius:'0.7rem'}}>Logout</Button>
-                        </Nav.Link>
-                    </Navbar>
-                    <div className='body'>
+                    <div className='header'>
+                        <Navbar bg='dark' variant='dark' style={!this.state.isDeviceMobile? {margin:'0.5rem', borderRadius:'1rem'}: {}}>
+                            <Navbar.Brand className='d-none d-sm-block'>Hi, {this.state.user}!</Navbar.Brand>
+                            <Navbar.Text className='w-100 text-sm-center'>You have {this.state.listItems.filter(i => !i.completed).length} to-do's</Navbar.Text>
+                            <Nav.Link className='ml-auto px-0' onClick={() => logout().then(this.props.history.push('/login'))}>
+                                <Button variant='outline-light' style={{borderRadius:'0.7rem'}}>Logout</Button>
+                            </Nav.Link>
+                        </Navbar>
+                    </div>
                         {this.state.pageLoading?
                         <p className='text-center text-muted h-100 p-5'><i className='fa fa-3x fa-circle-notch fa-spin mb-2' /><br />Loading</p>: 
                         this.state.err? 
                         <h4 className='text-center font-weight-bold text-danger h-100 p-5'>{this.state.err}</h4>:
                         <>
-                            <Container>
+                            <Container className='body'>
                                 {!this.state.isDeviceMobile && 
                                 <Row style={{justifyContent:'space-around'}}>
                                     <Col md={6}>
@@ -144,17 +145,16 @@ class Main extends Component {
                                     onDeleteClick={this.deleteItem} onEditClick={() => this.toggleEditModal()}
                                 />}
                             </Container>
-                            <div className='text-center'>
+                            <div className='footer text-center'>
                                 <Button style={{minWidth: this.state.isDeviceMobile? '10rem' : '12rem', margin:'0.5rem'}} variant='dark' size={this.state.isDeviceMobile? 'md' : 'lg'} onClick={() => this.deleteItem(null)}>Delete completed</Button>
                                 <Button style={{minWidth: this.state.isDeviceMobile? '10rem' : '12rem', margin:'0.5rem'}} variant='primary' size={this.state.isDeviceMobile? 'md' : 'lg'} onClick={this.toggleAddModal}>
                                     <i className='fa fa-plus'></i>{' '}Add new
                                 </Button>
-                                <div className='text-center p-1' style={{height:'2rem'}}>{this.state.actionLoading &&  <i className='fa fa-spinner fa-spin'></i>}</div>
+                                <div className='text-center p-2' style={{height:'3rem'}}>{this.state.actionLoading &&  <i className='fa fa-spinner fa-spin'></i>}</div>
                             </div>
                             <AddModal action='Add' submit={(item) => this.addItem(item)} show={this.state.isAddModalOpen} onHide={this.toggleAddModal} />
                             <AddModal action='Edit' submit={(item) => this.editItem(item,'body')} item={this.state.selectedItem} show={this.state.isEditModalOpen} onHide={this.toggleEditModal} />
                         </>}
-                    </div>
                </div>
             
         )

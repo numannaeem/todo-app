@@ -36,7 +36,7 @@ class TodoItem extends Component {
                 </Card>
             )
         else return(
-            <div className='todo-item text-center' style={{display:'flex',height:'28.5rem',justifyContent:'center',alignItems:'center'}}>
+            <div className='todo-item text-center' style={{display:'flex',height:'100%',justifyContent:'center',alignItems:'center'}}>
                 <h3 className='font-weight-light'>click on an item or add a new one</h3>
             </div>
 

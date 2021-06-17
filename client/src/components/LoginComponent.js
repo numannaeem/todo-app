@@ -129,13 +129,13 @@ function Login(props) {
                     <fieldset disabled={registering}>
                         <Form onSubmit={(e) => register(e)} >
                             <Form.Group>
-                                <Form.Label>Username</Form.Label>
-                                <Form.Control type='text' required value={regUsername} onChange={(e) => setRegUsername(e.target.value)}></Form.Control>
+                                <Form.Label for="regUsername">Username</Form.Label>
+                                <Form.Control name="regUsername" id="regUsername" type='text' required value={regUsername} onChange={(e) => setRegUsername(e.target.value)}></Form.Control>
                                 <Form.Text className='text-danger'>{usernameTakenText}</Form.Text>
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type='password' required value={regPassword} onChange={(e) => setRegPassword(e.target.value)}></Form.Control>
+                                <Form.Label for="regPassword">Password</Form.Label>
+                                <Form.Control name="regPassword" id="regPassword" type='password' required value={regPassword} onChange={(e) => setRegPassword(e.target.value)}></Form.Control>
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Confirm Password</Form.Label>

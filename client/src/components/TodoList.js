@@ -53,9 +53,12 @@ class TodoList extends Component {
         })
         return(
             <div className='list-lg'>
-                <ul>
-                    {items}
-                </ul>
+                {/* inner div hides scrollbar */}
+                <div style={{height:'100%', overflow:'auto'}}> 
+                    <ul>
+                        {items}
+                    </ul>
+                </div>
             </div>
         );
     }

@@ -4,8 +4,6 @@
 ul {
     margin: 0;
     padding: 0;
-    overflow-y: auto;
-    height: 28.5rem;
 }
 
 .main-page {
@@ -16,23 +14,19 @@ ul {
 }
 
 .body {
+    padding: 20px 10px;
     display: flex;
     height: 100%;
     flex-direction: column;
     justify-content: space-evenly;
+    align-items: stretch;
     flex: 1 1 auto;
-}
-
-.header{
-    position: sticky;
-    top:0;
-    background-color: hsl(56, 100%, 87%);
 }
 
 .todo-item {
     background-color: white;
     white-space: pre-wrap;
-    height: 28.5rem;
+    height: 100%;
     border-radius: 1rem;
     border: none;
     box-shadow: 0 5px 25px 1px rgba(150, 150, 150, 0.7);
@@ -40,19 +34,19 @@ ul {
 
 .list-lg{
     background-color: hsl(170, 71%, 99%);
-    overflow-y: hidden;
-    height: 28.5rem;
+    overflow-y: auto;
+    height: 63vh;
+    min-height: 25rem;
     border-radius: 1rem;
     box-shadow: 0 5px 25px 1px rgba(150, 150, 150, 0.7);
-    
-
 }
 
 .list-sm {
     background-color: white;
     white-space: pre-wrap;
     overflow-y: auto;
-    height: 26rem;
+    height: 100%;
+    max-height: 30rem;
 }
 
 .completed {
