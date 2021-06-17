@@ -16,12 +16,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "clientBuild": "react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "dev": "concurrently \"npm start\" \"nodemon ../server/index\" "
+    "eject": "react-scripts eject"
   },
-  "proxy":"http://localhost:5000",
+  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",
