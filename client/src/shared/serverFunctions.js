@@ -112,5 +112,7 @@ export async function deleteItem(id) {
 }
 
 export async function logout() {
+    localStorage.removeItem('username')
+    localStorage.removeItem('password')
     await fetch(baseUrl + 'logout', {credentials: 'include'})
 }

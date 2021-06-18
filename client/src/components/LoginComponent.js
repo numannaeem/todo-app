@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { Form, Col, Button, Modal } from "react-bootstrap";
+import { useState, useEffect } from "react"
+import { Form, Col, Button, Modal, Alert } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { baseUrl } from "../shared/baseUrl";
 
@@ -13,11 +13,34 @@ function Login(props) {
     const [loginPassword, setLoginPassword] = useState("");
     const [passwordMatchText, setPasswordMatchText] = useState('');
     const [usernameTakenText, setUsernameTakenText] = useState('')
-    const [statusText, setStatusText] = useState('')
+    const [statusText, setStatusText] = useState({variant: '',text: ''})
     const [loggingIn, setLoggingIn] = useState(false)
     const [registering, setRegistering] = useState(false)
+    const [rememberMe, setRememberMe] = useState(false)
     
     const history = useHistory()
+
+    useEffect(() => {
+        const username = localStorage.getItem('username')
+        const password = localStorage.getItem('password')
+        if(username && password) {
+          fetch(baseUrl + 'login',{
+            method:'POST',
+            headers: {
+                "content-type":'application/json'
+            },
+            body:JSON.stringify({
+              username,
+              password
+            }),
+            credentials: "include"
+          }).then(res => {
+            if(res.ok) {
+                history.push('/items');
+            }
+          })
+        }
+      },[history])
     
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -50,7 +73,7 @@ function Login(props) {
                 credentials: "include"
             }).then(res => {
                 if(res.ok) {
-                    setStatusText("Registered succesfully!")
+                    setStatusText({variant:'success',text:'Registered succesfully!'})
                     setRegConfirmPassword('')
                     setRegPassword('')
                     setRegUsername('');
@@ -85,11 +108,14 @@ function Login(props) {
             credentials: "include"
         }).then(res => {
             if(res.ok) {
+                localStorage.setItem('username', rememberMe ? loginUsername : '');
+                localStorage.setItem('password', rememberMe ? loginPassword : '');
                 history.push('/items');
             }
             else {
                 setLoggingIn(false)
-                res.json().then((data) => setStatusText(data.info.message)) 
+                res.json().then((data) => setStatusText({variant:'danger',text:data.info.message})
+                ) 
             }
         }).catch(err => {
             setLoggingIn(false)
@@ -111,6 +137,9 @@ function Login(props) {
                                 <Form.Group>
                                     <Form.Control type='password' required value={loginPassword} placeholder="Password" onChange={(e) => setLoginPassword(e.target.value)}></Form.Control>
                                 </Form.Group>
+                                <Form.Check style={{textAlign:'left',marginBottom:'0.5rem',color:'darkblue'}} 
+                                    type='checkbox' label={'Remember me?'} checked={rememberMe}
+                                    onChange={(e) => setRememberMe(e.target.checked)}/>
                                 <Button type='submit' block ><i className={!loggingIn?'fa fa-sign-in-alt' : 'fa fa-spin fa-spinner'} />{' '}Login</Button>
                             </Form>
                         </fieldset>
@@ -120,7 +149,9 @@ function Login(props) {
                             <i className='fa fa-plus'></i>{' '}Create Account
                         </Button>
                     </div>
-                    <h5 className='text-light text-center mt-5 w-100' style={{position:'absolute',left:'50%',transform:'translateX(-50%)'}}>{statusText}</h5>
+                    <Alert variant={statusText.variant} style={{position:'fixed',bottom:'10px',left:'50%',transform:'translateX(-50%)'}}>
+                        <b>{statusText.text}</b>
+                    </Alert>
                 </Col>
             </div>
             <Modal className='signup-modal' onHide={handleClose} show={show} size='md' centered>
@@ -130,12 +161,12 @@ function Login(props) {
                         <Form onSubmit={(e) => register(e)} >
                             <Form.Group>
                                 <Form.Label for="regUsername">Username</Form.Label>
-                                <Form.Control name="regUsername" id="regUsername" type='text' required value={regUsername} onChange={(e) => setRegUsername(e.target.value)}></Form.Control>
+                                <Form.Control autoComplete='new-username' type='text' required value={regUsername} onChange={(e) => setRegUsername(e.target.value)} onFocus={() => setUsernameTakenText('')}></Form.Control>
                                 <Form.Text className='text-danger'>{usernameTakenText}</Form.Text>
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label for="regPassword">Password</Form.Label>
-                                <Form.Control name="regPassword" id="regPassword" type='password' required value={regPassword} onChange={(e) => setRegPassword(e.target.value)}></Form.Control>
+                                <Form.Control autoComplete='new-password' type='password' required value={regPassword} onChange={(e) => setRegPassword(e.target.value)}></Form.Control>
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Confirm Password</Form.Label>
